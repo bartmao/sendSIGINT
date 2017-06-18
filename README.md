@@ -2,4 +2,4 @@
 Send ctrl+c to a console application
 
 # usage
-Simply use bin/Release/SendSignal.exe Pid to send ctrl+C
+Simply use invoke "bin/Release/SendSignal.exe PID" to send ctrl+C
