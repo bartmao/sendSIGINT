@@ -1,4 +1,6 @@
-bin
 obj
+bin/Debug
+bin/Release/*
+!bin/Release/SendSignal.exe
 *.vs
 *.user
