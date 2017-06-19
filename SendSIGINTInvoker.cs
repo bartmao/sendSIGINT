@@ -9,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SendSignal
+namespace SendSIGINT
 {
-    public partial class SendSignal : Form
+    public partial class SendSIGINTInvoker : Form
     {
-        public SendSignal(string[] args)
+        public SendSIGINTInvoker(string[] args)
         {
             //InitializeComponent();
             int processId;
@@ -26,8 +26,12 @@ namespace SendSignal
 
         public void Do(int processId) {
             var attachFlag = AttachConsole((uint)processId);
-            GenerateConsoleCtrlEvent(0, 0);
-            FreeConsole();
+            if (attachFlag) {
+                SetConsoleCtrlHandler(IntPtr.Zero, true);
+                GenerateConsoleCtrlEvent(0, 0);
+                FreeConsole();
+                SetConsoleCtrlHandler(IntPtr.Zero, false);
+            }
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -40,6 +44,7 @@ namespace SendSignal
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GenerateConsoleCtrlEvent(uint dwCtrlEvent, uint dwProcessGroupId);
 
-
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool SetConsoleCtrlHandler(IntPtr process, bool add);
     }
 }

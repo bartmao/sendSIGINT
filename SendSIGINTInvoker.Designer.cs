@@ -1,6 +1,6 @@
-﻿namespace SendSignal
+﻿namespace SendSIGINT
 {
-    partial class SendSignal
+    partial class SendSIGINTInvoker
     {
         /// <summary>
         /// Required designer variable.
